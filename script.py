@@ -1,15 +1,13 @@
-import pip
-
-pip.main(['install', 'pytelegrambotapi'])
 import time
 import requests
 import telebot
 import threading
 import os
-from background import keep_alive
 
-BOT_TOKEN = os.environ['BOT_TOKEN']
+with open('bot_token.txt', 'r') as file:
+    token = file.read().strip()
 
+BOT_TOKEN = token
 DEFAULT_INTERVAL = 3600  # in seconds
 interval = DEFAULT_INTERVAL
 is_running = False
@@ -105,6 +103,4 @@ def handle_start_command(message):
   else:
     bot.reply_to(message, 'Bot is already running!')
 
-
-keep_alive()
 bot.polling(none_stop=True)
