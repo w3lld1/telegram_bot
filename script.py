@@ -3,7 +3,10 @@ import requests
 import telebot
 from telebot import types
 
-BOT_TOKEN = '5785560958:AAFlufrWRoSbfQk09ZPHvyHuLBUNtZsUCAE'
+with open('bot_token.txt', 'r') as file:
+    token = file.read().strip()
+
+BOT_TOKEN = token
 DEFAULT_INTERVAL = 10800  # 3 hours in seconds
 interval = DEFAULT_INTERVAL
 
@@ -53,6 +56,5 @@ def handle_start_command(message):
     bot.reply_to(message, 'Bot started! Sending memes every 3 hours.')
 
     send_meme_with_delay(message.chat.id, interval)
-
 
 bot.polling(none_stop=True)
